@@ -1,0 +1,2 @@
+include 'scannerlib'
+project(':scannerlib').projectDir = new File(settingsDir, '../scannerlib')

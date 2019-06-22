@@ -1,4 +1,4 @@
-package com.example.SpringBootRestService.exceptions;
+package com.umnikov.scannerservice.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
