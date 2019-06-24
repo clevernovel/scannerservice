@@ -19,6 +19,9 @@ repositories { mavenCentral() }
 dependencies {
     compile('org.springframework.boot:spring-boot-starter')
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile group: 'io.swagger', name: 'swagger-annotations', version: '1.5.19'
+    compile group: 'com.squareup.retrofit2', name: 'retrofit', version: '2.4.0'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.6'
 }
 
 dependencyManagement {
