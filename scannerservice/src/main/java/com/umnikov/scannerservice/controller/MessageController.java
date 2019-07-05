@@ -17,7 +17,7 @@ public class MessageController {
 
   @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
   public UserDto getUserById(@PathVariable Integer id) {
-    return scannerService.getUserById();
+    return scannerService.getUserById(id);
   }
 
   @RequestMapping(value = "/edit", method = RequestMethod.POST)
