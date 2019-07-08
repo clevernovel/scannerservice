@@ -5,6 +5,8 @@ import com.umnikov.scannerservice.services.ScannerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/scanner")
 public class MessageController {
@@ -16,9 +18,15 @@ public class MessageController {
   }
 
   @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public UserDto getUserById(@PathVariable Integer id) {
+  public UserDto getUserById(@PathVariable Long id) {
     return scannerService.getUserById(id);
   }
+
+  @RequestMapping(value = "/test/all", method = RequestMethod.GET)
+  public List getUsersByMultipleIds(@PathVariable Long id) {
+    return scannerService.getUsersByMultipleIds(id);
+  }
+
 
   @RequestMapping(value = "/edit", method = RequestMethod.POST)
   public UserDto editUser(@RequestBody UserDto request) {

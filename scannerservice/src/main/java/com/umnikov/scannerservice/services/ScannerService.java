@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional(transactionManager = "transactionManager")
 public class ScannerService {
@@ -17,12 +19,17 @@ public class ScannerService {
     this.userDao = userDao;
   }
 
-  public UserDto getUserById(Integer id) {
-    User user = userDao.byId(id == null ? 0 : (long) id);
+  public UserDto getUserById(Long id) {
+    User user = userDao.byId(id == null ? 0 : id);
     UserDto userDto = new UserDto();
     userDto.id = user.getId();
     userDto.name = user.getName();
     return userDto;
+  }
+
+  public List<User> getUsersByMultipleIds(Long ids) {
+    List<User> list = userDao.byIds(ids == null ? 0 : ids);
+    return list;
   }
 
   public UserDto editUser(UserDto request) {
