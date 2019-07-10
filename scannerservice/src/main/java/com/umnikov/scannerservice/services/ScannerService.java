@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,8 +28,8 @@ public class ScannerService {
     return userDto;
   }
 
-  public List<User> getUsersByMultipleIds(Long ids) {
-    List<User> list = userDao.byIds(ids == null ? 0 : ids);
+  public List getUsersByMultipleIds(List<Long> ids) {
+    List<User> list = userDao.byIds(ids);
     return list;
   }
 

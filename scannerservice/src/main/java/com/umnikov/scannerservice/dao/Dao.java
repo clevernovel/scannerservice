@@ -22,7 +22,7 @@ public abstract class Dao<T> {
     return session().get(clazz, id);
   }
 
-  public List<T> byIds(final Long ids) {
+  public List<T> byIds(final List<Long> ids) {
     return session().byMultipleIds(clazz).multiLoad(ids);
   }
 

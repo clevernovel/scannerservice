@@ -22,8 +22,8 @@ public class MessageController {
     return scannerService.getUserById(id);
   }
 
-  @RequestMapping(value = "/test/all", method = RequestMethod.GET)
-  public List getUsersByMultipleIds(@PathVariable Long id) {
+  @RequestMapping(value = "/test/all/{id}", method = RequestMethod.GET)
+  public List getUsersByMultipleIds(@PathVariable List<Long> id) {
     return scannerService.getUsersByMultipleIds(id);
   }
 
