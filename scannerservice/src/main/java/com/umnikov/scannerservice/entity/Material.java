@@ -3,11 +3,11 @@ package com.umnikov.scannerservice.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "material")
+public class Material {
   @Id
-  @SequenceGenerator(name = "users_pk_sequence", sequenceName = "users_seq", allocationSize = 1)
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_pk_sequence")
+  @SequenceGenerator(name = "material_pk_sequence", sequenceName = "material_id_seq", allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "material_pk_sequence")
   private Long id;
   private String name;
 

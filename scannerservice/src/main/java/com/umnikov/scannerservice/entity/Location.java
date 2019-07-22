@@ -1,0 +1,25 @@
+package com.umnikov.scannerservice.entity;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "location")
+public class Location {
+  @Id
+  @SequenceGenerator(name = "location_pk_sequence", sequenceName = "location_id_seq", allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "location_pk_sequence")
+  private Long id;
+  private String name;
+
+  public Long getId() {
+    return id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+}
