@@ -1,5 +1,6 @@
 package com.umnikov.scannerservice.services;
 
+import com.umnikov.scannerlib.dto.LocationDto;
 import com.umnikov.scannerlib.dto.UserDto;
 import com.umnikov.scannerservice.dao.LocationDao;
 import com.umnikov.scannerservice.entity.Location;
@@ -19,17 +20,13 @@ public class LocationService {
     this.locationDao = locationDao;
   }
 
-  public UserDto getUserById(Long id) {
+  public LocationDto getUserById(Long id) {
     Location location = locationDao.byId(id == null ? 0 : id);
-    UserDto userDto = new UserDto();
-    userDto.id = location.getId();
-    userDto.name = location.getName();
-    return userDto;
+    return convertToDto(location);
   }
 
   public List getUsersByMultipleIds(List<Long> ids) {
-    List<Location> list = locationDao.byIds(ids);
-    return list;
+    return locationDao.byIds(ids);
   }
 
   public UserDto editUser(UserDto request) {
@@ -37,5 +34,18 @@ public class LocationService {
     location.setName(request.name);
     locationDao.saveAndFlush(location);
     return request;
+  }
+
+  public Location createModel() {
+    Location item = new Location();
+    item.setName("test");
+    return locationDao.saveAndFlush(item);
+  }
+
+  public LocationDto convertToDto(Location location) {
+    LocationDto locationDto = new LocationDto();
+    locationDto.id = location.getId();
+    locationDto.name = location.getName();
+    return locationDto;
   }
 }

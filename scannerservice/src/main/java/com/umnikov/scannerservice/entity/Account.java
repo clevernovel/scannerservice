@@ -9,26 +9,30 @@ public class Account {
   @SequenceGenerator(name = "account_pk_sequence", sequenceName = "account_id_seq", allocationSize = 1)
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_pk_sequence")
   private Long id;
-  private Long company;
-  private Long country;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "company")
+  private Company company;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "country")
+  private Country country;
 
   public Long getId() {
     return id;
   }
 
-  public Long getCompany() {
+  public Company getCompany() {
     return company;
   }
 
-  public void setCompany(Long company) {
+  public void setCompany(Company company) {
     this.company = company;
   }
 
-  public Long getCountry() {
+  public Country getCountry() {
     return country;
   }
 
-  public void setCountry(Long country) {
+  public void setCountry(Country country) {
     this.country = country;
   }
 }

@@ -1,6 +1,6 @@
 package com.umnikov.scannerservice.controller;
 
-import com.umnikov.scannerlib.dto.UserDto;
+import com.umnikov.scannerlib.dto.CompanyDto;
 import com.umnikov.scannerservice.services.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +18,7 @@ public class CompanyMessageController {
   }
 
   @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public UserDto getUserById(@PathVariable Long id) {
+  public CompanyDto getUserById(@PathVariable Long id) {
     return companyService.getUserById(id);
   }
 
@@ -29,7 +29,7 @@ public class CompanyMessageController {
 
 
   @RequestMapping(value = "/edit", method = RequestMethod.POST)
-  public UserDto editUser(@RequestBody UserDto request) {
+  public CompanyDto editUser(@RequestBody CompanyDto request) {
     return companyService.editUser(request);
   }
 }

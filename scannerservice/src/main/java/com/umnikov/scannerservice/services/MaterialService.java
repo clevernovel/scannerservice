@@ -1,6 +1,6 @@
 package com.umnikov.scannerservice.services;
 
-import com.umnikov.scannerlib.dto.UserDto;
+import com.umnikov.scannerlib.dto.MaterialDto;
 import com.umnikov.scannerservice.dao.MaterialDao;
 import com.umnikov.scannerservice.entity.Material;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +19,9 @@ public class MaterialService {
     this.materialDao = materialDao;
   }
 
-  public UserDto getUserById(Long id) {
+  public MaterialDto getUserById(Long id) {
     Material material = materialDao.byId(id == null ? 0 : id);
-    UserDto userDto = new UserDto();
-    userDto.id = material.getId();
-    userDto.name = material.getName();
-    return userDto;
+    return convertToDto(material);
   }
 
   public List getUsersByMultipleIds(List<Long> ids) {
@@ -32,10 +29,24 @@ public class MaterialService {
     return list;
   }
 
-  public UserDto editUser(UserDto request) {
+  public MaterialDto editUser(MaterialDto request) {
     Material material = new Material();
     material.setName(request.name);
     materialDao.saveAndFlush(material);
     return request;
+  }
+
+  public MaterialDto convertToDto(Material material) {
+    MaterialDto locationDto = new MaterialDto();
+    locationDto.id = material.getId();
+    locationDto.name = material.getName();
+    return locationDto;
+  }
+
+  public Material createModel() {
+    Material item = new Material();
+    item.setName("test");
+    Material res = materialDao.saveAndFlush(item);
+    return res;
   }
 }

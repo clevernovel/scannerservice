@@ -22,11 +22,15 @@ public class ItemMessageController {
     return itemService.getUserById(id);
   }
 
+  @RequestMapping(value = "/test/safe", method = RequestMethod.GET)
+  public ItemDto saveNewElement() {
+    return itemService.create();
+  }
+
   @RequestMapping(value = "/test/all/{id}", method = RequestMethod.GET)
   public List getUsersByMultipleIds(@PathVariable List<Long> id) {
     return itemService.getUsersByMultipleIds(id);
   }
-
 
   @RequestMapping(value = "/edit", method = RequestMethod.POST)
   public ItemDto editUser(@RequestBody ItemDto request) {

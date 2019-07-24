@@ -1,5 +1,6 @@
 package com.umnikov.scannerservice.services;
 
+import com.umnikov.scannerlib.dto.QuantityDto;
 import com.umnikov.scannerlib.dto.UserDto;
 import com.umnikov.scannerservice.dao.QuantityDao;
 import com.umnikov.scannerservice.entity.Quantity;
@@ -19,12 +20,9 @@ public class QuantityService {
     this.quantityDao = quantityDao;
   }
 
-  public UserDto getUserById(Long id) {
+  public QuantityDto getUserById(Long id) {
     Quantity quantity = quantityDao.byId(id == null ? 0 : id);
-    UserDto userDto = new UserDto();
-    userDto.id = quantity.getId();
-    userDto.name = quantity.getName();
-    return userDto;
+    return convertToDto(quantity);
   }
 
   public List getUsersByMultipleIds(List<Long> ids) {
@@ -37,5 +35,19 @@ public class QuantityService {
     quantity.setName(request.name);
     quantityDao.saveAndFlush(quantity);
     return request;
+  }
+
+  public QuantityDto convertToDto(Quantity quantity) {
+    QuantityDto locationDto = new QuantityDto();
+    locationDto.id = quantity.getId();
+    locationDto.name = quantity.getName();
+    return locationDto;
+  }
+
+  public Quantity createModel() {
+    Quantity item = new Quantity();
+    item.setName("test");
+    Quantity res = quantityDao.saveAndFlush(item);
+    return res;
   }
 }

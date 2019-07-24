@@ -1,6 +1,6 @@
 package com.umnikov.scannerservice.controller;
 
-import com.umnikov.scannerlib.dto.UserDto;
+import com.umnikov.scannerlib.dto.MaterialDto;
 import com.umnikov.scannerservice.services.MaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +18,7 @@ public class MaterialMessageController {
   }
 
   @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public UserDto getUserById(@PathVariable Long id) {
+  public MaterialDto getUserById(@PathVariable Long id) {
     return materialService.getUserById(id);
   }
 
@@ -29,7 +29,7 @@ public class MaterialMessageController {
 
 
   @RequestMapping(value = "/edit", method = RequestMethod.POST)
-  public UserDto editUser(@RequestBody UserDto request) {
+  public MaterialDto editUser(@RequestBody MaterialDto request) {
     return materialService.editUser(request);
   }
 }

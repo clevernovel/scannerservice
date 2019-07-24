@@ -1,5 +1,6 @@
 package com.umnikov.scannerservice.controller;
 
+import com.umnikov.scannerlib.dto.LocationDto;
 import com.umnikov.scannerlib.dto.UserDto;
 import com.umnikov.scannerservice.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class LocationMessageController {
   }
 
   @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public UserDto getUserById(@PathVariable Long id) {
+  public LocationDto getUserById(@PathVariable Long id) {
     return locationService.getUserById(id);
   }
 

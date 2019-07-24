@@ -1,5 +1,6 @@
 package com.umnikov.scannerservice.services;
 
+import com.umnikov.scannerlib.dto.SectionDto;
 import com.umnikov.scannerlib.dto.UserDto;
 import com.umnikov.scannerservice.dao.SectionDao;
 import com.umnikov.scannerservice.entity.Section;
@@ -19,17 +20,13 @@ public class SectionService {
     this.sectionDao = sectionDao;
   }
 
-  public UserDto getUserById(Long id) {
+  public SectionDto getUserById(Long id) {
     Section section = sectionDao.byId(id == null ? 0 : id);
-    UserDto userDto = new UserDto();
-    userDto.id = section.getId();
-    userDto.name = section.getName();
-    return userDto;
+    return convertToDto(section);
   }
 
   public List getUsersByMultipleIds(List<Long> ids) {
-    List<Section> list = sectionDao.byIds(ids);
-    return list;
+    return sectionDao.byIds(ids);
   }
 
   public UserDto editUser(UserDto request) {
@@ -38,4 +35,18 @@ public class SectionService {
     sectionDao.saveAndFlush(section);
     return request;
   }
+
+  public SectionDto convertToDto(Section section) {
+    SectionDto locationDto = new SectionDto();
+    locationDto.id = section.getId();
+    locationDto.name = section.getName();
+    return locationDto;
+  }
+
+  public Section createModel() {
+    Section item = new Section();
+    item.setName("test");
+    return sectionDao.saveAndFlush(item);
+  }
 }
+

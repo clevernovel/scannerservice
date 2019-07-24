@@ -13,19 +13,19 @@ import java.util.List;
 @Transactional(transactionManager = "transactionManager")
 public class AccountService {
   private final AccountDao accountDao;
+  private final CompanyService companyService;
+  private final CountryService countryService;
 
   @Autowired
-  public AccountService(AccountDao accountDao) {
+  public AccountService(AccountDao accountDao, CompanyService companyService, CountryService countryService) {
     this.accountDao = accountDao;
+    this.companyService = companyService;
+    this.countryService = countryService;
   }
 
   public AccountDto getUserById(Long id) {
     Account account = accountDao.byId(id == null ? 0 : id);
-    AccountDto accountDto = new AccountDto();
-    accountDto.id = account.getId();
-    accountDto.company = account.getCompany();
-    accountDto.country = account.getCountry();
-    return accountDto;
+    return convertToDto(account);
   }
 
   public List getUsersByMultipleIds(List<Long> ids) {
@@ -35,9 +35,25 @@ public class AccountService {
 
   public AccountDto editAccount(AccountDto request) {
     Account account = new Account();
-    account.setCompany(request.company);
-    account.setCountry(request.country);
+//    account.setCompany(request.company);
+//    account.setCountry(request.country);
     accountDao.saveAndFlush(account);
     return request;
+  }
+
+  public AccountDto convertToDto(Account account) {
+    AccountDto accountDto = new AccountDto();
+    accountDto.id = account.getId();
+    accountDto.country = countryService.convertToDto(account.getCountry());
+    accountDto.company = companyService.convertToDto(account.getCompany());
+    return accountDto;
+  }
+
+  public Account createModel() {
+    Account account = new Account();
+    account.setCompany(companyService.createModel());
+    account.setCountry(countryService.createModel());
+    Account res = accountDao.saveAndFlush(account);
+    return res;
   }
 }

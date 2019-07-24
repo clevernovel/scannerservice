@@ -1,5 +1,6 @@
 package com.umnikov.scannerservice.controller;
 
+import com.umnikov.scannerlib.dto.QuantityDto;
 import com.umnikov.scannerlib.dto.UserDto;
 import com.umnikov.scannerservice.services.QuantityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class QuantityMessageController {
   }
 
   @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public UserDto getUserById(@PathVariable Long id) {
+  public QuantityDto getUserById(@PathVariable Long id) {
     return quantityService.getUserById(id);
   }
 

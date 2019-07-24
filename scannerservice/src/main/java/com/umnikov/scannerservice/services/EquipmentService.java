@@ -1,5 +1,6 @@
 package com.umnikov.scannerservice.services;
 
+import com.umnikov.scannerlib.dto.EquipmentDto;
 import com.umnikov.scannerlib.dto.UserDto;
 import com.umnikov.scannerservice.dao.EquipmentDao;
 import com.umnikov.scannerservice.entity.Equipment;
@@ -19,12 +20,9 @@ public class EquipmentService {
     this.equipmentDao = equipmentDao;
   }
 
-  public UserDto getUserById(Long id) {
+  public EquipmentDto getUserById(Long id) {
     Equipment equipment = equipmentDao.byId(id == null ? 0 : id);
-    UserDto userDto = new UserDto();
-    userDto.id = equipment.getId();
-    userDto.name = equipment.getName();
-    return userDto;
+    return convertToDto(equipment);
   }
 
   public List getUsersByMultipleIds(List<Long> ids) {
@@ -37,5 +35,19 @@ public class EquipmentService {
     equipment.setName(request.name);
     equipmentDao.saveAndFlush(equipment);
     return request;
+  }
+
+  public EquipmentDto convertToDto(Equipment equipment) {
+    EquipmentDto locationDto = new EquipmentDto();
+    locationDto.id = equipment.getId();
+    locationDto.name = equipment.getName();
+    return locationDto;
+  }
+
+  public Equipment createModel() {
+    Equipment item = new Equipment();
+    item.setName("test");
+    Equipment res = equipmentDao.saveAndFlush(item);
+    return res;
   }
 }

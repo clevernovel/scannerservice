@@ -1,5 +1,6 @@
 package com.umnikov.scannerservice.controller;
 
+import com.umnikov.scannerlib.dto.EquipmentDto;
 import com.umnikov.scannerlib.dto.UserDto;
 import com.umnikov.scannerservice.services.EquipmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class EquipmentMessageController {
   }
 
   @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public UserDto getUserById(@PathVariable Long id) {
+  public EquipmentDto getUserById(@PathVariable Long id) {
     return equipmentService.getUserById(id);
   }
 

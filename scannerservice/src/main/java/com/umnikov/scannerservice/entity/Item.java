@@ -10,12 +10,24 @@ public class Item {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_pk_sequence")
   private Long id;
   private String name;
-  private Long location;
-  private Long quantity;
-  private Long account;
-  private Long section;
-  private Long equipment;
-  private Long material;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "location")
+  private Location location;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "quantity")
+  private Quantity quantity;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "account")
+  private Account account;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "section")
+  private Section section;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "equipment")
+  private Equipment equipment;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "material")
+  private Material material;
   private String global;
   private String comment;
 
@@ -31,51 +43,51 @@ public class Item {
     this.name = name;
   }
 
-  public Long getLocation() {
+  public Location getLocation() {
     return location;
   }
 
-  public void setLocation(Long location) {
+  public void setLocation(Location location) {
     this.location = location;
   }
 
-  public Long getQuantity() {
+  public Quantity getQuantity() {
     return quantity;
   }
 
-  public void setQuantity(Long quantity) {
+  public void setQuantity(Quantity quantity) {
     this.quantity = quantity;
   }
 
-  public Long getAccount() {
+  public Account getAccount() {
     return account;
   }
 
-  public void setAccount(Long account) {
+  public void setAccount(Account account) {
     this.account = account;
   }
 
-  public Long getSection() {
+  public Section getSection() {
     return section;
   }
 
-  public void setSection(Long section) {
+  public void setSection(Section section) {
     this.section = section;
   }
 
-  public Long getEquipment() {
+  public Equipment getEquipment() {
     return equipment;
   }
 
-  public void setEquipment(Long equipment) {
+  public void setEquipment(Equipment equipment) {
     this.equipment = equipment;
   }
 
-  public Long getMaterial() {
+  public Material getMaterial() {
     return material;
   }
 
-  public void setMaterial(Long material) {
+  public void setMaterial(Material material) {
     this.material = material;
   }
 

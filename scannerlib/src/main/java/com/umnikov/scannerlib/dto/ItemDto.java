@@ -6,12 +6,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class ItemDto {
   public Long id;
   public String name;
-  public Long location;
-  public Long quantity;
-  public Long account;
-  public Long section;
-  public Long equipment;
-  public Long material;
+  public LocationDto location;
+  public QuantityDto quantity;
+  public AccountDto account;
+  public SectionDto section;
+  public EquipmentDto equipment;
+  public MaterialDto material;
   public String global;
   public String comment;
 

@@ -1,5 +1,6 @@
 package com.umnikov.scannerservice.controller;
 
+import com.umnikov.scannerlib.dto.SectionDto;
 import com.umnikov.scannerlib.dto.UserDto;
 import com.umnikov.scannerservice.services.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class SectionMessageController {
   public SectionMessageController(SectionService sectionService) { this.sectionService = sectionService; }
 
   @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public UserDto getUserById(@PathVariable Long id) {
+  public SectionDto getUserById(@PathVariable Long id) {
     return sectionService.getUserById(id);
   }
 

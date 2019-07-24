@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AccountDto {
   public long id;
-  public Long company;
-  public Long country;
+  public CompanyDto company;
+  public CountryDto country;
 
 
   public void validation() {

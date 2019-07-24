@@ -1,5 +1,6 @@
 package com.umnikov.scannerservice.controller;
 
+import com.umnikov.scannerlib.dto.CountryDto;
 import com.umnikov.scannerlib.dto.UserDto;
 import com.umnikov.scannerservice.services.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class CountryMessageController {
   }
 
   @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public UserDto getUserById(@PathVariable Long id) {
+  public CountryDto getUserById(@PathVariable Long id) {
     return countryService.getUserById(id);
   }
 

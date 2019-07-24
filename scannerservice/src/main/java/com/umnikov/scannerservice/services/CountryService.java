@@ -1,5 +1,6 @@
 package com.umnikov.scannerservice.services;
 
+import com.umnikov.scannerlib.dto.CountryDto;
 import com.umnikov.scannerlib.dto.UserDto;
 import com.umnikov.scannerservice.dao.CountryDao;
 import com.umnikov.scannerservice.entity.Country;
@@ -19,17 +20,13 @@ public class CountryService {
     this.countryDao = countryDao;
   }
 
-  public UserDto getUserById(Long id) {
+  public CountryDto getUserById(Long id) {
     Country country = countryDao.byId(id == null ? 0 : id);
-    UserDto userDto = new UserDto();
-    userDto.id = country.getId();
-    userDto.name = country.getName();
-    return userDto;
+    return convertToDto(country);
   }
 
   public List getUsersByMultipleIds(List<Long> ids) {
-    List<Country> list = countryDao.byIds(ids);
-    return list;
+    return countryDao.byIds(ids);
   }
 
   public UserDto editUser(UserDto request) {
@@ -37,5 +34,18 @@ public class CountryService {
     country.setName(request.name);
     countryDao.saveAndFlush(country);
     return request;
+  }
+
+  public Country createModel() {
+    Country country = new Country();
+    country.setName("test");
+    return countryDao.saveAndFlush(country);
+  }
+
+  public CountryDto convertToDto(Country country) {
+    CountryDto countryDto = new CountryDto();
+    countryDto.id = country.getId();
+    countryDto.name = country.getName();
+    return countryDto;
   }
 }
