@@ -20,26 +20,30 @@ public class LocationService {
     this.locationDao = locationDao;
   }
 
-  public LocationDto getUserById(Long id) {
+  public LocationDto getLocationById(Long id) {
     Location location = locationDao.byId(id == null ? 0 : id);
     return convertToDto(location);
   }
 
-  public List getUsersByMultipleIds(List<Long> ids) {
+  public List getLocationsByMultipleIds(List<Long> ids) {
     return locationDao.byIds(ids);
   }
 
-  public UserDto editUser(UserDto request) {
+  public LocationDto editUser(LocationDto request) {
     Location location = new Location();
     location.setName(request.name);
     locationDao.saveAndFlush(location);
     return request;
   }
 
-  public Location createModel() {
-    Location item = new Location();
-    item.setName("test");
-    return locationDao.saveAndFlush(item);
+  public Location createModelOrGetExisting(LocationDto locationDto) {
+    Location location = locationDao.findByName(locationDto.name);
+    if (location == null) {
+      location = new Location();
+      location.setName(locationDto.name);
+      locationDao.saveAndFlush(location);
+    }
+    return location;
   }
 
   public LocationDto convertToDto(Location location) {

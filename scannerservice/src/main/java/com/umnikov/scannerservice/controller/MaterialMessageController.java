@@ -18,13 +18,13 @@ public class MaterialMessageController {
   }
 
   @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public MaterialDto getUserById(@PathVariable Long id) {
-    return materialService.getUserById(id);
+  public MaterialDto getMaterialById(@PathVariable Long id) {
+    return materialService.getMaterialById(id);
   }
 
   @RequestMapping(value = "/test/all/{id}", method = RequestMethod.GET)
-  public List getUsersByMultipleIds(@PathVariable List<Long> id) {
-    return materialService.getUsersByMultipleIds(id);
+  public List getMaterialsByMultipleIds(@PathVariable List<Long> id) {
+    return materialService.getMaterialsByMultipleIds(id);
   }
 
 

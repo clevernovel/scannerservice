@@ -18,18 +18,18 @@ public class ItemMessageController {
   }
 
   @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public ItemDto getUserById(@PathVariable Long id) {
-    return itemService.getUserById(id);
+  public ItemDto getItemById(@PathVariable Long id) {
+    return itemService.getItemById(id);
   }
 
-  @RequestMapping(value = "/test/safe", method = RequestMethod.GET)
-  public ItemDto saveNewElement() {
-    return itemService.create();
+    @RequestMapping(value = "/test/save", method = RequestMethod.POST)
+  public ItemDto saveNewElement(@RequestBody ItemDto request) {
+    return itemService.create(request);
   }
 
   @RequestMapping(value = "/test/all/{id}", method = RequestMethod.GET)
-  public List getUsersByMultipleIds(@PathVariable List<Long> id) {
-    return itemService.getUsersByMultipleIds(id);
+  public List getItemsByMultipleIds(@PathVariable List<Long> id) {
+    return itemService.getItemsByMultipleIds(id);
   }
 
   @RequestMapping(value = "/edit", method = RequestMethod.POST)

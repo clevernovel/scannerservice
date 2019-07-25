@@ -20,17 +20,17 @@ public class EquipmentService {
     this.equipmentDao = equipmentDao;
   }
 
-  public EquipmentDto getUserById(Long id) {
+  public EquipmentDto getEquipmentById(Long id) {
     Equipment equipment = equipmentDao.byId(id == null ? 0 : id);
     return convertToDto(equipment);
   }
 
-  public List getUsersByMultipleIds(List<Long> ids) {
+  public List getEquipmentsByMultipleIds(List<Long> ids) {
     List<Equipment> list = equipmentDao.byIds(ids);
     return list;
   }
 
-  public UserDto editUser(UserDto request) {
+  public EquipmentDto editUser(EquipmentDto request) {
     Equipment equipment = new Equipment();
     equipment.setName(request.name);
     equipmentDao.saveAndFlush(equipment);
@@ -44,10 +44,13 @@ public class EquipmentService {
     return locationDto;
   }
 
-  public Equipment createModel() {
-    Equipment item = new Equipment();
-    item.setName("test");
-    Equipment res = equipmentDao.saveAndFlush(item);
-    return res;
+  public Equipment createModelOrGetExisting(EquipmentDto equipmentDto) {
+    Equipment equipment = equipmentDao.findByName(equipmentDto.name);
+    if (equipment == null) {
+      equipment = new Equipment();
+      equipment.setName(equipmentDto.name);
+      equipmentDao.saveAndFlush(equipment);
+    }
+    return equipment;
   }
 }

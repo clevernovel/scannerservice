@@ -19,12 +19,12 @@ public class MaterialService {
     this.materialDao = materialDao;
   }
 
-  public MaterialDto getUserById(Long id) {
+  public MaterialDto getMaterialById(Long id) {
     Material material = materialDao.byId(id == null ? 0 : id);
     return convertToDto(material);
   }
 
-  public List getUsersByMultipleIds(List<Long> ids) {
+  public List getMaterialsByMultipleIds(List<Long> ids) {
     List<Material> list = materialDao.byIds(ids);
     return list;
   }
@@ -43,10 +43,13 @@ public class MaterialService {
     return locationDto;
   }
 
-  public Material createModel() {
-    Material item = new Material();
-    item.setName("test");
-    Material res = materialDao.saveAndFlush(item);
-    return res;
+  public Material createModelOrGetExisting(MaterialDto materialDto) {
+    Material material = materialDao.findByName(materialDto.name);
+    if (material == null) {
+      material = new Material();
+      material.setName(materialDto.name);
+      materialDao.saveAndFlush(material);
+    }
+    return material;
   }
 }

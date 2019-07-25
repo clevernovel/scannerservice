@@ -31,9 +31,14 @@ public class ItemService {
     this.materialService = materialService;
   }
 
-  public ItemDto getUserById(Long id) {
+  public ItemDto getItemById(Long id) {
     Item item = itemDao.byId(id == null ? 0 : id);
     return convertToDto(item);
+  }
+
+  public List getItemsByMultipleIds(List<Long> ids) {
+    List<Item> list = itemDao.byIds(ids);
+    return list;
   }
 
   private ItemDto convertToDto(Item item) {
@@ -51,11 +56,6 @@ public class ItemService {
     return itemDto;
   }
 
-  public List getUsersByMultipleIds(List<Long> ids) {
-    List<Item> list = itemDao.byIds(ids);
-    return list;
-  }
-
   //this is not edit method
   public ItemDto editItem(ItemDto request) {
     Item item = new Item();
@@ -71,22 +71,21 @@ public class ItemService {
     return request;
   }
 
-  public Item createModel() {
+  public Item createByRequest(ItemDto request) {
     Item item = new Item();
-    item.setName("test");
-    item.setLocation(locationService.createModel());
-    item.setQuantity(quantityService.createModel());
-    item.setAccount(accountService.createModel());
-    item.setSection(sectionService.createModel());
-    item.setEquipment(equipmentService.createModel());
-    item.setMaterial(materialService.createModel());
-    item.setGlobal("global");
-    item.setComment("comment test");
-    Item res = itemDao.saveAndFlush(item);
-    return res;
+    item.setName(request.name);
+    item.setLocation(locationService.createModelOrGetExisting(request.location));
+    item.setQuantity(quantityService.createModelOrGetExisting(request.quantity));
+    item.setAccount(accountService.createModel(request.account));
+    item.setSection(sectionService.createModelOrGetExisting(request.section));
+    item.setEquipment(equipmentService.createModelOrGetExisting(request.equipment));
+    item.setMaterial(materialService.createModelOrGetExisting(request.material));
+    item.setGlobal(request.global);
+    item.setComment(request.comment);
+    return itemDao.saveAndFlush(item);
   }
 
-  public ItemDto create() {
-    return convertToDto(createModel());
+  public ItemDto create(ItemDto request) {
+    return convertToDto(createByRequest(request));
   }
 }

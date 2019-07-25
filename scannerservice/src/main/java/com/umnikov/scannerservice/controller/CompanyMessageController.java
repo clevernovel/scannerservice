@@ -18,13 +18,13 @@ public class CompanyMessageController {
   }
 
   @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public CompanyDto getUserById(@PathVariable Long id) {
-    return companyService.getUserById(id);
+  public CompanyDto getCompanyById(@PathVariable Long id) {
+    return companyService.getCompanyById(id);
   }
 
   @RequestMapping(value = "/test/all/{id}", method = RequestMethod.GET)
-  public List getUsersByMultipleIds(@PathVariable List<Long> id) {
-    return companyService.getUsersByMultipleIds(id);
+  public List getCompaniesByMultipleIds(@PathVariable List<Long> id) {
+    return companyService.getCompaniesByMultipleIds(id);
   }
 
 

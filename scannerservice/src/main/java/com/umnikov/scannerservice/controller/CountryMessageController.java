@@ -19,13 +19,13 @@ public class CountryMessageController {
   }
 
   @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public CountryDto getUserById(@PathVariable Long id) {
-    return countryService.getUserById(id);
+  public CountryDto getCountryById(@PathVariable Long id) {
+    return countryService.getCountryById(id);
   }
 
   @RequestMapping(value = "/test/all/{id}", method = RequestMethod.GET)
-  public List getUsersByMultipleIds(@PathVariable List<Long> id) {
-    return countryService.getUsersByMultipleIds(id);
+  public List getCountriesByMultipleIds(@PathVariable List<Long> id) {
+    return countryService.getCountriesByMultipleIds(id);
   }
 
 

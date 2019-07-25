@@ -17,18 +17,16 @@ public class SectionMessageController {
   public SectionMessageController(SectionService sectionService) { this.sectionService = sectionService; }
 
   @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public SectionDto getUserById(@PathVariable Long id) {
-    return sectionService.getUserById(id);
+  public SectionDto getSectionById(@PathVariable Long id) {    return sectionService.getSectionById(id);
   }
 
   @RequestMapping(value = "/test/all/{id}", method = RequestMethod.GET)
-  public List getUsersByMultipleIds(@PathVariable List<Long> id) {
-    return sectionService.getUsersByMultipleIds(id);
+  public List getSectionsByMultipleIds(@PathVariable List<Long> id) {    return sectionService.getSectionsByMultipleIds(id);
   }
 
 
   @RequestMapping(value = "/edit", method = RequestMethod.POST)
-  public UserDto editUser(@RequestBody UserDto request) {
+  public SectionDto editUser(@RequestBody SectionDto request) {
     return sectionService.editUser(request);
   }
 }

@@ -20,17 +20,17 @@ public class QuantityService {
     this.quantityDao = quantityDao;
   }
 
-  public QuantityDto getUserById(Long id) {
+  public QuantityDto getQuantityById(Long id) {
     Quantity quantity = quantityDao.byId(id == null ? 0 : id);
     return convertToDto(quantity);
   }
 
-  public List getUsersByMultipleIds(List<Long> ids) {
+  public List getQuantitiesByMultipleIds(List<Long> ids) {
     List<Quantity> list = quantityDao.byIds(ids);
     return list;
   }
 
-  public UserDto editUser(UserDto request) {
+  public QuantityDto editUser(QuantityDto request) {
     Quantity quantity = new Quantity();
     quantity.setName(request.name);
     quantityDao.saveAndFlush(quantity);
@@ -44,10 +44,13 @@ public class QuantityService {
     return locationDto;
   }
 
-  public Quantity createModel() {
-    Quantity item = new Quantity();
-    item.setName("test");
-    Quantity res = quantityDao.saveAndFlush(item);
-    return res;
+  public Quantity createModelOrGetExisting(QuantityDto quantityDto) {
+    Quantity quantity = quantityDao.findByName(quantityDto.name);
+    if (quantity == null) {
+      quantity = new Quantity();
+      quantity.setName(quantityDto.name);
+      quantityDao.saveAndFlush(quantity);
+    }
+    return quantity;
   }
 }

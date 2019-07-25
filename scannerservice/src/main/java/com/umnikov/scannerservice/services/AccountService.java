@@ -23,12 +23,12 @@ public class AccountService {
     this.countryService = countryService;
   }
 
-  public AccountDto getUserById(Long id) {
+  public AccountDto getAccountById(Long id) {
     Account account = accountDao.byId(id == null ? 0 : id);
     return convertToDto(account);
   }
 
-  public List getUsersByMultipleIds(List<Long> ids) {
+  public List getAccountsByMultipleIds(List<Long> ids) {
     List<Account> list = accountDao.byIds(ids);
     return list;
   }
@@ -49,11 +49,12 @@ public class AccountService {
     return accountDto;
   }
 
-  public Account createModel() {
+  public Account createModel(AccountDto request) {
     Account account = new Account();
-    account.setCompany(companyService.createModel());
-    account.setCountry(countryService.createModel());
+    account.setCompany(companyService.createModelOrGetExisting(request.company));
+    account.setCountry(countryService.createModelOrGetExisting(request.country));
     Account res = accountDao.saveAndFlush(account);
     return res;
   }
+
 }

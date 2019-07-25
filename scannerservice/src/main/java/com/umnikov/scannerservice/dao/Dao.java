@@ -26,7 +26,7 @@ public abstract class Dao<T> {
     return session().byMultipleIds(clazz).multiLoad(ids);
   }
 
-  private Session session() {
+  protected Session session() {
     return sessionFactory.getCurrentSession();
   }
 

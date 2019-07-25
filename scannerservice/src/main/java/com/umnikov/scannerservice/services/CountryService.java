@@ -20,12 +20,12 @@ public class CountryService {
     this.countryDao = countryDao;
   }
 
-  public CountryDto getUserById(Long id) {
+  public CountryDto getCountryById(Long id) {
     Country country = countryDao.byId(id == null ? 0 : id);
     return convertToDto(country);
   }
 
-  public List getUsersByMultipleIds(List<Long> ids) {
+  public List getCountriesByMultipleIds(List<Long> ids) {
     return countryDao.byIds(ids);
   }
 
@@ -36,16 +36,20 @@ public class CountryService {
     return request;
   }
 
-  public Country createModel() {
-    Country country = new Country();
-    country.setName("test");
-    return countryDao.saveAndFlush(country);
-  }
-
   public CountryDto convertToDto(Country country) {
     CountryDto countryDto = new CountryDto();
     countryDto.id = country.getId();
     countryDto.name = country.getName();
     return countryDto;
+  }
+
+  public Country createModelOrGetExisting(CountryDto countryDto) {
+    Country country = countryDao.findByName(countryDto.name);
+    if (country == null) {
+      country = new Country();
+      country.setName(countryDto.name);
+      countryDao.saveAndFlush(country);
+    }
+    return country;
   }
 }

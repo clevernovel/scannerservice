@@ -19,18 +19,18 @@ public class LocationMessageController {
   }
 
   @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public LocationDto getUserById(@PathVariable Long id) {
-    return locationService.getUserById(id);
+  public LocationDto getLocationById(@PathVariable Long id) {
+    return locationService.getLocationById(id);
   }
 
   @RequestMapping(value = "/test/all/{id}", method = RequestMethod.GET)
-  public List getUsersByMultipleIds(@PathVariable List<Long> id) {
-    return locationService.getUsersByMultipleIds(id);
+  public List getLocationsByMultipleIds(@PathVariable List<Long> id) {
+    return locationService.getLocationsByMultipleIds(id);
   }
 
 
   @RequestMapping(value = "/edit", method = RequestMethod.POST)
-  public UserDto editUser(@RequestBody UserDto request) {
+  public LocationDto editUser(@RequestBody LocationDto request) {
     return locationService.editUser(request);
   }
 }

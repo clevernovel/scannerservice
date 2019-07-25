@@ -19,18 +19,18 @@ public class QuantityMessageController {
   }
 
   @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public QuantityDto getUserById(@PathVariable Long id) {
-    return quantityService.getUserById(id);
+  public QuantityDto getQuantityById(@PathVariable Long id) {
+    return quantityService.getQuantityById(id);
   }
 
   @RequestMapping(value = "/test/all/{id}", method = RequestMethod.GET)
-  public List getUsersByMultipleIds(@PathVariable List<Long> id) {
-    return quantityService.getUsersByMultipleIds(id);
+  public List getQuantitiesByMultipleIds(@PathVariable List<Long> id) {
+    return quantityService.getQuantitiesByMultipleIds(id);
   }
 
 
   @RequestMapping(value = "/edit", method = RequestMethod.POST)
-  public UserDto editUser(@RequestBody UserDto request) {
+  public QuantityDto editUser(@RequestBody QuantityDto request) {
     return quantityService.editUser(request);
   }
 }

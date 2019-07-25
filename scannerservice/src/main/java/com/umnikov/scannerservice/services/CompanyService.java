@@ -19,12 +19,12 @@ public class CompanyService {
     this.companyDao = companyDao;
   }
 
-  public CompanyDto getUserById(Long id) {
+  public CompanyDto getCompanyById(Long id) {
     Company company = companyDao.byId(id == null ? 0 : id);
     return convertToDto(company);
   }
 
-  public List getUsersByMultipleIds(List<Long> ids) {
+  public List getCompaniesByMultipleIds(List<Long> ids) {
     return companyDao.byIds(ids);
   }
 
@@ -35,10 +35,14 @@ public class CompanyService {
     return request;
   }
 
-  public Company createModel() {
-    Company item = new Company();
-    item.setName("test");
-    return companyDao.saveAndFlush(item);
+  public Company createModelOrGetExisting(CompanyDto companyDto) {
+    Company company = companyDao.findByName(companyDto.name);
+    if (company == null) {
+      company = new Company();
+      company.setName(companyDto.name);
+      companyDao.saveAndFlush(company);
+    }
+    return company;
   }
 
   public CompanyDto convertToDto(Company company) {

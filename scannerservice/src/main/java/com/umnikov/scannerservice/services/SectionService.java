@@ -20,16 +20,16 @@ public class SectionService {
     this.sectionDao = sectionDao;
   }
 
-  public SectionDto getUserById(Long id) {
+  public SectionDto getSectionById(Long id) {
     Section section = sectionDao.byId(id == null ? 0 : id);
     return convertToDto(section);
   }
 
-  public List getUsersByMultipleIds(List<Long> ids) {
+  public List getSectionsByMultipleIds(List<Long> ids) {
     return sectionDao.byIds(ids);
   }
 
-  public UserDto editUser(UserDto request) {
+  public SectionDto editUser(SectionDto request) {
     Section section = new Section();
     section.setName(request.name);
     sectionDao.saveAndFlush(section);
@@ -37,16 +37,20 @@ public class SectionService {
   }
 
   public SectionDto convertToDto(Section section) {
-    SectionDto locationDto = new SectionDto();
-    locationDto.id = section.getId();
-    locationDto.name = section.getName();
-    return locationDto;
+    SectionDto sectionDto = new SectionDto();
+    sectionDto.id = section.getId();
+    sectionDto.name = section.getName();
+    return sectionDto;
   }
 
-  public Section createModel() {
-    Section item = new Section();
-    item.setName("test");
-    return sectionDao.saveAndFlush(item);
+  public Section createModelOrGetExisting(SectionDto sectionDto) {
+    Section section = sectionDao.findByName(sectionDto.name);
+    if (section == null) {
+      section = new Section();
+      section.setName(sectionDto.name);
+      sectionDao.saveAndFlush(section);
+    }
+    return section;
   }
 }
 

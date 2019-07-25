@@ -19,18 +19,18 @@ public class EquipmentMessageController {
   }
 
   @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public EquipmentDto getUserById(@PathVariable Long id) {
-    return equipmentService.getUserById(id);
+  public EquipmentDto getEquipmentById(@PathVariable Long id) {
+    return equipmentService.getEquipmentById(id);
   }
 
   @RequestMapping(value = "/test/all/{id}", method = RequestMethod.GET)
-  public List getUsersByMultipleIds(@PathVariable List<Long> id) {
-    return equipmentService.getUsersByMultipleIds(id);
+  public List getEquipmentsByMultipleIds(@PathVariable List<Long> id) {
+    return equipmentService.getEquipmentsByMultipleIds(id);
   }
 
 
   @RequestMapping(value = "/edit", method = RequestMethod.POST)
-  public UserDto editUser(@RequestBody UserDto request) {
+  public EquipmentDto editUser(@RequestBody EquipmentDto request) {
     return equipmentService.editUser(request);
   }
 }

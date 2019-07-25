@@ -15,7 +15,7 @@ public class ItemDto {
   public String global;
   public String comment;
 
-
+  //only for edit
   public void validation() {
     if (id < 0) {
       throw new RuntimeException();
