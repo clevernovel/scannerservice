@@ -9,11 +9,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/location")
-public class LocationMessageController {
+public class LocationController {
   private final LocationService locationService;
 
   @Autowired
-  public LocationMessageController(LocationService locationService) {
+  public LocationController(LocationService locationService) {
     this.locationService = locationService;
   }
 

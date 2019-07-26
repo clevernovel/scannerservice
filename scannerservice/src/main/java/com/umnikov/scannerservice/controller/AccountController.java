@@ -9,11 +9,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/account")
-public class AccountMessageController {
+public class AccountController {
   private final AccountService accountService;
 
   @Autowired
-  public AccountMessageController(AccountService accountService) {
+  public AccountController(AccountService accountService) {
     this.accountService = accountService;
   }
 

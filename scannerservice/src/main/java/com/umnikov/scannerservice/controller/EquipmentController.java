@@ -9,11 +9,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/equipment")
-public class EquipmentMessageController {
+public class EquipmentController {
   private final EquipmentService equipmentService;
 
   @Autowired
-  public EquipmentMessageController(EquipmentService equipmentService) {
+  public EquipmentController(EquipmentService equipmentService) {
     this.equipmentService = equipmentService;
   }
 

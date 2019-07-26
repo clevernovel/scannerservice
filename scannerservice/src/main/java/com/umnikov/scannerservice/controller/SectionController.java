@@ -9,11 +9,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/section")
-public class SectionMessageController {
+public class SectionController {
   private final SectionService sectionService;
 
   @Autowired
-  public SectionMessageController(SectionService sectionService) {
+  public SectionController(SectionService sectionService) {
     this.sectionService = sectionService;
   }
 

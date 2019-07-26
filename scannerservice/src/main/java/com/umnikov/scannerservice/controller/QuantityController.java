@@ -9,11 +9,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/quantity")
-public class QuantityMessageController {
+public class QuantityController {
   private final QuantityService quantityService;
 
   @Autowired
-  public QuantityMessageController(QuantityService quantityService) {
+  public QuantityController(QuantityService quantityService) {
     this.quantityService = quantityService;
   }
 

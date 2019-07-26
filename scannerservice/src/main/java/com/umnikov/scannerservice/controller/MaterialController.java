@@ -9,11 +9,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/material")
-public class MaterialMessageController {
+public class MaterialController {
   private final MaterialService materialService;
 
   @Autowired
-  public MaterialMessageController(MaterialService materialService) {
+  public MaterialController(MaterialService materialService) {
     this.materialService = materialService;
   }
 

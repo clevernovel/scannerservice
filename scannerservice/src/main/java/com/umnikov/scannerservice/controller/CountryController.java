@@ -9,11 +9,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/country")
-public class CountryMessageController {
+public class CountryController {
   private final CountryService countryService;
 
   @Autowired
-  public CountryMessageController(CountryService countryService) {
+  public CountryController(CountryService countryService) {
     this.countryService = countryService;
   }
 
