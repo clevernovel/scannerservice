@@ -36,7 +36,8 @@ public class MaterialService extends ServiceForController<MaterialDto, Material>
   }
 
   @Override
-  public MaterialDto edit(MaterialDto dto) {
-    return null;
+  public Material fillEditedFields(Material model, MaterialDto dto) {
+    model.setName(dto.name);
+    return materialDao.saveAndFlush(model);
   }
 }

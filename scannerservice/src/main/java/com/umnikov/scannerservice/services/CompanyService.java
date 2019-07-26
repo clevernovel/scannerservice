@@ -37,7 +37,8 @@ public class CompanyService extends ServiceForController<CompanyDto, Company> {
   }
 
   @Override
-  public CompanyDto edit(CompanyDto dto) {
-    return null;
+  public Company fillEditedFields(Company model, CompanyDto dto) {
+    model.setName(dto.name);
+    return companyDao.saveAndFlush(model);
   }
 }

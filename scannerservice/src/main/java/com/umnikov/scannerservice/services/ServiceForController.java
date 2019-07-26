@@ -1,5 +1,6 @@
 package com.umnikov.scannerservice.services;
 
+import com.umnikov.scannerlib.dto.GetId;
 import com.umnikov.scannerservice.dao.MainAction;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -7,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Transactional(transactionManager = "transactionManager")
-public abstract class ServiceForController<T, F> {
+public abstract class ServiceForController<T extends GetId, F> {
   protected MainAction<F> dao;
 
   public ServiceForController(MainAction<F> dao) {
@@ -18,7 +19,17 @@ public abstract class ServiceForController<T, F> {
 
   public abstract F convertToModel(T dto);
 
-  public abstract T edit(T dto);
+  public abstract F fillEditedFields(F model, T dto);
+
+  public T edit(T dto) {
+    return convertToDto(editAndGetModel(dto));
+  }
+
+  public F editAndGetModel(T dto) {
+    F model = dao.byId(dto.getId());
+    model = fillEditedFields(model, dto);
+    return dao.saveAndFlush(model);
+  }
 
   public List<T> all() {
     List<F> models = dao.all();

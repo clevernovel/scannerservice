@@ -36,7 +36,8 @@ public class QuantityService extends ServiceForController<QuantityDto, Quantity>
   }
 
   @Override
-  public QuantityDto edit(QuantityDto dto) {
-    return null;
+  public Quantity fillEditedFields(Quantity model, QuantityDto dto) {
+    model.setName(dto.name);
+    return quantityDao.saveAndFlush(model);
   }
 }

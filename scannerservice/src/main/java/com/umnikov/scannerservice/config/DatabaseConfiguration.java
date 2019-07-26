@@ -27,7 +27,7 @@ public class DatabaseConfiguration {
   private Environment environment;
 
   @Bean
-  private DataSource dataSource() {
+  public DataSource dataSource() {
     HikariDataSource dataSource = new HikariDataSource();
     dataSource.setDriverClassName(environment.getRequiredProperty("database.driver"));
     dataSource.setJdbcUrl(environment.getRequiredProperty("database.url"));

@@ -38,7 +38,8 @@ public class EquipmentService extends ServiceForController<EquipmentDto, Equipme
   }
 
   @Override
-  public EquipmentDto edit(EquipmentDto dto) {
-    return null;
+  public Equipment fillEditedFields(Equipment model, EquipmentDto dto) {
+    model.setName(dto.name);
+    return equipmentDao.saveAndFlush(model);
   }
 }

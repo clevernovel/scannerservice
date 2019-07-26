@@ -3,7 +3,7 @@ package com.umnikov.scannerlib.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ItemDto {
+public class ItemDto implements GetId {
   public Long id;
   public String name;
   public LocationDto location;
@@ -20,5 +20,10 @@ public class ItemDto {
     if (id < 0) {
       throw new RuntimeException();
     }
+  }
+
+  @Override
+  public Long getId() {
+    return id;
   }
 }

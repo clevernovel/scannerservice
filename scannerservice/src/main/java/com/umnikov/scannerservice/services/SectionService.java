@@ -36,8 +36,9 @@ public class SectionService extends ServiceForController<SectionDto, Section> {
   }
 
   @Override
-  public SectionDto edit(SectionDto dto) {
-    return null;
+  public Section fillEditedFields(Section model, SectionDto dto) {
+    model.setName(dto.name);
+    return sectionDao.saveAndFlush(model);
   }
 }
 

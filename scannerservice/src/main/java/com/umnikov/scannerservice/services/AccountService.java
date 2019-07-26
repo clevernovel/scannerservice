@@ -48,7 +48,10 @@ public class AccountService extends ServiceForController<AccountDto, Account> {
   }
 
   @Override
-  public AccountDto edit(AccountDto dto) {
-    return null;
+  public Account fillEditedFields(Account model, AccountDto dto) {
+    model.setCountry(countryService.editAndGetModel(dto.country));
+    model.setCompany(companyService.editAndGetModel(dto.company));
+    accountDao.saveAndFlush(model);
+    return model;
   }
 }

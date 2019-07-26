@@ -38,7 +38,8 @@ public class CountryService extends ServiceForController<CountryDto, Country> {
   }
 
   @Override
-  public CountryDto edit(CountryDto dto) {
-    return null;
+  public Country fillEditedFields(Country model, CountryDto dto) {
+    model.setName(dto.name);
+    return countryDao.saveAndFlush(model);
   }
 }

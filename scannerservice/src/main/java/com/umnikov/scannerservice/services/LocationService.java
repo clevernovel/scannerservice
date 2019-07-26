@@ -28,15 +28,16 @@ public class LocationService extends ServiceForController<LocationDto, Location>
     return location;
   }
 
-  @Override
-  public LocationDto edit(LocationDto dto) {
-    return null;
-  }
-
   public LocationDto convertToDto(Location location) {
     LocationDto locationDto = new LocationDto();
     locationDto.id = location.getId();
     locationDto.name = location.getName();
     return locationDto;
+  }
+
+  @Override
+  public Location fillEditedFields(Location model, LocationDto dto) {
+    model.setName(dto.name);
+    return locationDao.saveAndFlush(model);
   }
 }

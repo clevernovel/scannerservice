@@ -62,7 +62,17 @@ public class ItemService extends ServiceForController<ItemDto, Item> {
   }
 
   @Override
-  public ItemDto edit(ItemDto dto) {
-    return null;
+  public Item fillEditedFields(Item model, ItemDto dto) {
+    model.setName(dto.name);
+    model.setLocation(locationService.editAndGetModel(dto.location));
+    model.setQuantity(quantityService.editAndGetModel(dto.quantity));
+    model.setAccount(accountService.editAndGetModel(dto.account));
+    model.setSection(sectionService.editAndGetModel(dto.section));
+    model.setEquipment(equipmentService.editAndGetModel(dto.equipment));
+    model.setMaterial(materialService.editAndGetModel(dto.material));
+    model.setGlobal(dto.global);
+    model.setComment(dto.comment);
+    itemDao.saveAndFlush(model);
+    return model;
   }
 }
