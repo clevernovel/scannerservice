@@ -1,7 +1,6 @@
 package com.umnikov.scannerservice.controller;
 
 import com.umnikov.scannerlib.dto.EquipmentDto;
-import com.umnikov.scannerlib.dto.UserDto;
 import com.umnikov.scannerservice.services.EquipmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +28,7 @@ public class EquipmentMessageController {
   }
 
 
-  @RequestMapping(value = "/edit", method = RequestMethod.POST)
+  @RequestMapping(value = "/test/save", method = RequestMethod.POST)
   public EquipmentDto editUser(@RequestBody EquipmentDto request) {
     return equipmentService.editUser(request);
   }

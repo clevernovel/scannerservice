@@ -1,7 +1,6 @@
 package com.umnikov.scannerservice.controller;
 
 import com.umnikov.scannerlib.dto.SectionDto;
-import com.umnikov.scannerlib.dto.UserDto;
 import com.umnikov.scannerservice.services.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +23,7 @@ public class SectionMessageController {
   public List getSectionsByMultipleIds(@PathVariable List<Long> id) {    return sectionService.getSectionsByMultipleIds(id);
   }
 
-
-  @RequestMapping(value = "/edit", method = RequestMethod.POST)
+  @RequestMapping(value = "/test/save", method = RequestMethod.POST)
   public SectionDto editUser(@RequestBody SectionDto request) {
     return sectionService.editUser(request);
   }

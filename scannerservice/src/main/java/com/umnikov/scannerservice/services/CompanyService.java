@@ -51,4 +51,8 @@ public class CompanyService {
     companyDto.name = company.getName();
     return companyDto;
   }
+
+  public CompanyDto create(CompanyDto request) {
+    return convertToDto(createModelOrGetExisting(request));
+  }
 }

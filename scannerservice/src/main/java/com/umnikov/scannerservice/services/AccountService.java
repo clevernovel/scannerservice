@@ -57,4 +57,15 @@ public class AccountService {
     return res;
   }
 
+  public Account createModelOrGetExisting(AccountDto accountDto) {
+    Account account = accountDao.findByName(accountDto.id, accountDto.id);
+    if (account == null) {
+      account = new Account();
+      account.setCompany(companyService.createModelOrGetExisting(accountDto.company));
+      account.setCountry(countryService.createModelOrGetExisting(accountDto.country));
+      accountDao.saveAndFlush(account);
+    }
+    return account;
+  }
+
 }

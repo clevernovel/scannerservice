@@ -76,7 +76,7 @@ public class ItemService {
     item.setName(request.name);
     item.setLocation(locationService.createModelOrGetExisting(request.location));
     item.setQuantity(quantityService.createModelOrGetExisting(request.quantity));
-    item.setAccount(accountService.createModel(request.account));
+    item.setAccount(accountService.createModelOrGetExisting(request.account));
     item.setSection(sectionService.createModelOrGetExisting(request.section));
     item.setEquipment(equipmentService.createModelOrGetExisting(request.equipment));
     item.setMaterial(materialService.createModelOrGetExisting(request.material));

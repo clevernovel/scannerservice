@@ -29,7 +29,7 @@ public class CountryMessageController {
   }
 
 
-  @RequestMapping(value = "/edit", method = RequestMethod.POST)
+  @RequestMapping(value = "/test/save", method = RequestMethod.POST)
   public UserDto editUser(@RequestBody UserDto request) {
     return countryService.editUser(request);
   }

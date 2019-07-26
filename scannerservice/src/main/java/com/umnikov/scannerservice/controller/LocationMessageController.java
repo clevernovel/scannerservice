@@ -1,7 +1,6 @@
 package com.umnikov.scannerservice.controller;
 
 import com.umnikov.scannerlib.dto.LocationDto;
-import com.umnikov.scannerlib.dto.UserDto;
 import com.umnikov.scannerservice.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +27,7 @@ public class LocationMessageController {
     return locationService.getLocationsByMultipleIds(id);
   }
 
-
-  @RequestMapping(value = "/edit", method = RequestMethod.POST)
+  @RequestMapping(value = "/test/save", method = RequestMethod.POST)
   public LocationDto editUser(@RequestBody LocationDto request) {
     return locationService.editUser(request);
   }

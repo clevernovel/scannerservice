@@ -27,8 +27,7 @@ public class MaterialMessageController {
     return materialService.getMaterialsByMultipleIds(id);
   }
 
-
-  @RequestMapping(value = "/edit", method = RequestMethod.POST)
+  @RequestMapping(value = "/test/save", method = RequestMethod.POST)
   public MaterialDto editUser(@RequestBody MaterialDto request) {
     return materialService.editUser(request);
   }

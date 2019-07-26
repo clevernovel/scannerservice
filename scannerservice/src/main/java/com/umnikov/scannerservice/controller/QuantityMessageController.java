@@ -1,7 +1,6 @@
 package com.umnikov.scannerservice.controller;
 
 import com.umnikov.scannerlib.dto.QuantityDto;
-import com.umnikov.scannerlib.dto.UserDto;
 import com.umnikov.scannerservice.services.QuantityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +27,7 @@ public class QuantityMessageController {
     return quantityService.getQuantitiesByMultipleIds(id);
   }
 
-
-  @RequestMapping(value = "/edit", method = RequestMethod.POST)
+  @RequestMapping(value = "/test/save", method = RequestMethod.POST)
   public QuantityDto editUser(@RequestBody QuantityDto request) {
     return quantityService.editUser(request);
   }

@@ -27,10 +27,9 @@ public class CompanyMessageController {
     return companyService.getCompaniesByMultipleIds(id);
   }
 
-
-  @RequestMapping(value = "/edit", method = RequestMethod.POST)
+  @RequestMapping(value = "/test/save", method = RequestMethod.POST)
   public CompanyDto editUser(@RequestBody CompanyDto request) {
-    return companyService.editUser(request);
+    return companyService.create(request);
   }
 }
 
