@@ -17,24 +17,24 @@ public class AccountMessageController {
     this.accountService = accountService;
   }
 
-  @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public AccountDto getAccountById(@PathVariable Long id) {
-    return accountService.getAccountById(id);
+  @RequestMapping(value = "/by_id/{id}", method = RequestMethod.GET)
+  public AccountDto byId(@PathVariable Long id) {
+    return accountService.byId(id);
   }
 
-  @RequestMapping(value = "/test/all/{id}", method = RequestMethod.GET)
-  public List getAccountsByMultipleIds(@PathVariable List<Long> id) {
-    return accountService.getAccountsByMultipleIds(id);
+  @RequestMapping(value = "/all", method = RequestMethod.GET)
+  public List<AccountDto> all() {
+    return accountService.all();
   }
 
-  @RequestMapping(value = "/test/save", method = RequestMethod.POST)
-  public AccountDto saveNewElement(@RequestBody AccountDto request) {
-    return accountService.convertToDto(accountService.createModel(request));
+  @RequestMapping(value = "/save", method = RequestMethod.POST)
+  public AccountDto save(@RequestBody AccountDto request) {
+    return accountService.save(request);
   }
 
   @RequestMapping(value = "/edit", method = RequestMethod.POST)
-  public AccountDto editUser(@RequestBody AccountDto request) {
-    return accountService.editAccount(request);
+  public AccountDto edit(@RequestBody AccountDto request) {
+    return accountService.edit(request);
   }
 }
 

@@ -1,7 +1,5 @@
 package com.umnikov.scannerservice.dao;
 
-import com.umnikov.scannerservice.entity.Location;
-import com.umnikov.scannerservice.entity.Location_;
 import com.umnikov.scannerservice.entity.Section;
 import com.umnikov.scannerservice.entity.Section_;
 import org.springframework.stereotype.Repository;
@@ -12,6 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.List;
 
 @Repository
 public class SectionDao extends Dao<Section> {
@@ -23,6 +22,11 @@ public class SectionDao extends Dao<Section> {
     super.save(section);
     super.flush();
     return section;
+  }
+
+  @Override
+  public List<Section> all() {
+    return getAll();
   }
 
   public Section findByName(String name) {

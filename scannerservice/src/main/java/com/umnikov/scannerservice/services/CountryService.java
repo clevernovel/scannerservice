@@ -1,41 +1,24 @@
 package com.umnikov.scannerservice.services;
 
 import com.umnikov.scannerlib.dto.CountryDto;
-import com.umnikov.scannerlib.dto.UserDto;
 import com.umnikov.scannerservice.dao.CountryDao;
 import com.umnikov.scannerservice.entity.Country;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @Transactional(transactionManager = "transactionManager")
-public class CountryService {
+public class CountryService extends ServiceForController<CountryDto, Country> {
   private final CountryDao countryDao;
 
   @Autowired
   public CountryService(CountryDao countryDao) {
+    super(countryDao);
     this.countryDao = countryDao;
   }
 
-  public CountryDto getCountryById(Long id) {
-    Country country = countryDao.byId(id == null ? 0 : id);
-    return convertToDto(country);
-  }
-
-  public List getCountriesByMultipleIds(List<Long> ids) {
-    return countryDao.byIds(ids);
-  }
-
-  public UserDto editUser(UserDto request) {
-    Country country = new Country();
-    country.setName(request.name);
-    countryDao.saveAndFlush(country);
-    return request;
-  }
-
+  @Override
   public CountryDto convertToDto(Country country) {
     CountryDto countryDto = new CountryDto();
     countryDto.id = country.getId();
@@ -43,13 +26,19 @@ public class CountryService {
     return countryDto;
   }
 
-  public Country createModelOrGetExisting(CountryDto countryDto) {
-    Country country = countryDao.findByName(countryDto.name);
+  @Override
+  public Country convertToModel(CountryDto dto) {
+    Country country = countryDao.findByName(dto.name);
     if (country == null) {
       country = new Country();
-      country.setName(countryDto.name);
+      country.setName(dto.name);
       countryDao.saveAndFlush(country);
     }
     return country;
+  }
+
+  @Override
+  public CountryDto edit(CountryDto dto) {
+    return null;
   }
 }

@@ -10,6 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.List;
 
 @Repository
 public class LocationDao extends Dao<Location> {
@@ -21,6 +22,11 @@ public class LocationDao extends Dao<Location> {
     super.save(location);
     super.flush();
     return location;
+  }
+
+  @Override
+  public List<Location> all() {
+    return getAll();
   }
 
   public Location findByName(String name) {

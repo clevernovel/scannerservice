@@ -17,19 +17,24 @@ public class MaterialMessageController {
     this.materialService = materialService;
   }
 
-  @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
+  @RequestMapping(value = "/by_id/{id}", method = RequestMethod.GET)
   public MaterialDto getMaterialById(@PathVariable Long id) {
-    return materialService.getMaterialById(id);
+    return materialService.byId(id);
   }
 
-  @RequestMapping(value = "/test/all/{id}", method = RequestMethod.GET)
-  public List getMaterialsByMultipleIds(@PathVariable List<Long> id) {
-    return materialService.getMaterialsByMultipleIds(id);
+  @RequestMapping(value = "/all", method = RequestMethod.GET)
+  public List all() {
+    return materialService.all();
   }
 
-  @RequestMapping(value = "/test/save", method = RequestMethod.POST)
-  public MaterialDto editUser(@RequestBody MaterialDto request) {
-    return materialService.editUser(request);
+  @RequestMapping(value = "/save", method = RequestMethod.POST)
+  public MaterialDto save(@RequestBody MaterialDto request) {
+    return materialService.save(request);
+  }
+
+  @RequestMapping(value = "/edit", method = RequestMethod.POST)
+  public MaterialDto edit(@RequestBody MaterialDto request) {
+    return materialService.edit(request);
   }
 }
 

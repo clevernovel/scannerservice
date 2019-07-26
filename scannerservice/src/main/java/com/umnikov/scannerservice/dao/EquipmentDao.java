@@ -2,8 +2,6 @@ package com.umnikov.scannerservice.dao;
 
 import com.umnikov.scannerservice.entity.Equipment;
 import com.umnikov.scannerservice.entity.Equipment_;
-import com.umnikov.scannerservice.entity.Location;
-import com.umnikov.scannerservice.entity.Location_;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
@@ -12,6 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.List;
 
 @Repository
 public class EquipmentDao extends Dao<Equipment> {
@@ -23,6 +22,11 @@ public class EquipmentDao extends Dao<Equipment> {
     super.save(equipment);
     super.flush();
     return equipment;
+  }
+
+  @Override
+  public List<Equipment> all() {
+    return getAll();
   }
 
   public Equipment findByName(String name) {

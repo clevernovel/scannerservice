@@ -1,7 +1,5 @@
 package com.umnikov.scannerservice.dao;
 
-import com.umnikov.scannerservice.entity.Location;
-import com.umnikov.scannerservice.entity.Location_;
 import com.umnikov.scannerservice.entity.Material;
 import com.umnikov.scannerservice.entity.Material_;
 import org.springframework.stereotype.Repository;
@@ -12,6 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.List;
 
 @Repository
 public class MaterialDao extends Dao<Material> {
@@ -23,6 +22,11 @@ public class MaterialDao extends Dao<Material> {
     super.save(material);
     super.flush();
     return material;
+  }
+
+  @Override
+  public List<Material> all() {
+    return getAll();
   }
 
   public Material findByName(String name) {

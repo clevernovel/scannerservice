@@ -1,7 +1,6 @@
 package com.umnikov.scannerservice.controller;
 
 import com.umnikov.scannerlib.dto.CountryDto;
-import com.umnikov.scannerlib.dto.UserDto;
 import com.umnikov.scannerservice.services.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,20 +17,24 @@ public class CountryMessageController {
     this.countryService = countryService;
   }
 
-  @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public CountryDto getCountryById(@PathVariable Long id) {
-    return countryService.getCountryById(id);
+  @RequestMapping(value = "/by_id/{id}", method = RequestMethod.GET)
+  public CountryDto byId(@PathVariable Long id) {
+    return countryService.byId(id);
   }
 
-  @RequestMapping(value = "/test/all/{id}", method = RequestMethod.GET)
-  public List getCountriesByMultipleIds(@PathVariable List<Long> id) {
-    return countryService.getCountriesByMultipleIds(id);
+  @RequestMapping(value = "/all", method = RequestMethod.GET)
+  public List<CountryDto> all() {
+    return countryService.all();
   }
 
+  @RequestMapping(value = "/edit", method = RequestMethod.POST)
+  public CountryDto edit(@RequestBody CountryDto request) {
+    return countryService.edit(request);
+  }
 
-  @RequestMapping(value = "/test/save", method = RequestMethod.POST)
-  public UserDto editUser(@RequestBody UserDto request) {
-    return countryService.editUser(request);
+  @RequestMapping(value = "/save", method = RequestMethod.POST)
+  public CountryDto save(@RequestBody CountryDto request) {
+    return countryService.save(request);
   }
 }
 

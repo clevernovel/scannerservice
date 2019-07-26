@@ -17,20 +17,25 @@ public class EquipmentMessageController {
     this.equipmentService = equipmentService;
   }
 
-  @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public EquipmentDto getEquipmentById(@PathVariable Long id) {
-    return equipmentService.getEquipmentById(id);
+  @RequestMapping(value = "/by_id/{id}", method = RequestMethod.GET)
+  public EquipmentDto byId(@PathVariable Long id) {
+    return equipmentService.byId(id);
   }
 
-  @RequestMapping(value = "/test/all/{id}", method = RequestMethod.GET)
-  public List getEquipmentsByMultipleIds(@PathVariable List<Long> id) {
-    return equipmentService.getEquipmentsByMultipleIds(id);
+  @RequestMapping(value = "/all", method = RequestMethod.GET)
+  public List all() {
+    return equipmentService.all();
   }
 
 
-  @RequestMapping(value = "/test/save", method = RequestMethod.POST)
-  public EquipmentDto editUser(@RequestBody EquipmentDto request) {
-    return equipmentService.editUser(request);
+  @RequestMapping(value = "/save", method = RequestMethod.POST)
+  public EquipmentDto save(@RequestBody EquipmentDto request) {
+    return equipmentService.save(request);
+  }
+
+  @RequestMapping(value = "/edit", method = RequestMethod.POST)
+  public EquipmentDto edit(@RequestBody EquipmentDto request) {
+    return equipmentService.edit(request);
   }
 }
 

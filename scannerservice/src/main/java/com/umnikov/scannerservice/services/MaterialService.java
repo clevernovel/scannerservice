@@ -7,33 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @Transactional(transactionManager = "transactionManager")
-public class MaterialService {
+public class MaterialService extends ServiceForController<MaterialDto, Material> {
   private final MaterialDao materialDao;
 
   @Autowired
   public MaterialService(MaterialDao materialDao) {
+    super(materialDao);
     this.materialDao = materialDao;
-  }
-
-  public MaterialDto getMaterialById(Long id) {
-    Material material = materialDao.byId(id == null ? 0 : id);
-    return convertToDto(material);
-  }
-
-  public List getMaterialsByMultipleIds(List<Long> ids) {
-    List<Material> list = materialDao.byIds(ids);
-    return list;
-  }
-
-  public MaterialDto editUser(MaterialDto request) {
-    Material material = new Material();
-    material.setName(request.name);
-    materialDao.saveAndFlush(material);
-    return request;
   }
 
   public MaterialDto convertToDto(Material material) {
@@ -43,7 +25,7 @@ public class MaterialService {
     return locationDto;
   }
 
-  public Material createModelOrGetExisting(MaterialDto materialDto) {
+  public Material convertToModel(MaterialDto materialDto) {
     Material material = materialDao.findByName(materialDto.name);
     if (material == null) {
       material = new Material();
@@ -51,5 +33,10 @@ public class MaterialService {
       materialDao.saveAndFlush(material);
     }
     return material;
+  }
+
+  @Override
+  public MaterialDto edit(MaterialDto dto) {
+    return null;
   }
 }

@@ -1,40 +1,21 @@
 package com.umnikov.scannerservice.services;
 
 import com.umnikov.scannerlib.dto.QuantityDto;
-import com.umnikov.scannerlib.dto.UserDto;
 import com.umnikov.scannerservice.dao.QuantityDao;
 import com.umnikov.scannerservice.entity.Quantity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @Transactional(transactionManager = "transactionManager")
-public class QuantityService {
+public class QuantityService extends ServiceForController<QuantityDto, Quantity> {
   private final QuantityDao quantityDao;
 
   @Autowired
   public QuantityService(QuantityDao quantityDao) {
+    super(quantityDao);
     this.quantityDao = quantityDao;
-  }
-
-  public QuantityDto getQuantityById(Long id) {
-    Quantity quantity = quantityDao.byId(id == null ? 0 : id);
-    return convertToDto(quantity);
-  }
-
-  public List getQuantitiesByMultipleIds(List<Long> ids) {
-    List<Quantity> list = quantityDao.byIds(ids);
-    return list;
-  }
-
-  public QuantityDto editUser(QuantityDto request) {
-    Quantity quantity = new Quantity();
-    quantity.setName(request.name);
-    quantityDao.saveAndFlush(quantity);
-    return request;
   }
 
   public QuantityDto convertToDto(Quantity quantity) {
@@ -44,7 +25,7 @@ public class QuantityService {
     return locationDto;
   }
 
-  public Quantity createModelOrGetExisting(QuantityDto quantityDto) {
+  public Quantity convertToModel(QuantityDto quantityDto) {
     Quantity quantity = quantityDao.findByName(quantityDto.name);
     if (quantity == null) {
       quantity = new Quantity();
@@ -52,5 +33,10 @@ public class QuantityService {
       quantityDao.saveAndFlush(quantity);
     }
     return quantity;
+  }
+
+  @Override
+  public QuantityDto edit(QuantityDto dto) {
+    return null;
   }
 }

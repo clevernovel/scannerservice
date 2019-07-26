@@ -17,19 +17,24 @@ public class LocationMessageController {
     this.locationService = locationService;
   }
 
-  @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public LocationDto getLocationById(@PathVariable Long id) {
-    return locationService.getLocationById(id);
+  @RequestMapping(value = "/by_id/{id}", method = RequestMethod.GET)
+  public LocationDto byId(@PathVariable Long id) {
+    return locationService.byId(id);
   }
 
-  @RequestMapping(value = "/test/all/{id}", method = RequestMethod.GET)
-  public List getLocationsByMultipleIds(@PathVariable List<Long> id) {
-    return locationService.getLocationsByMultipleIds(id);
+  @RequestMapping(value = "/all", method = RequestMethod.GET)
+  public List all() {
+    return locationService.all();
   }
 
-  @RequestMapping(value = "/test/save", method = RequestMethod.POST)
-  public LocationDto editUser(@RequestBody LocationDto request) {
-    return locationService.editUser(request);
+  @RequestMapping(value = "/save", method = RequestMethod.POST)
+  public LocationDto save(@RequestBody LocationDto request) {
+    return locationService.save(request);
+  }
+
+  @RequestMapping(value = "/edit", method = RequestMethod.POST)
+  public LocationDto edit(@RequestBody LocationDto request) {
+    return locationService.edit(request);
   }
 }
 

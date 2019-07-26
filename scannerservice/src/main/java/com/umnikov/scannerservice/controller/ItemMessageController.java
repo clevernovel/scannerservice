@@ -17,24 +17,24 @@ public class ItemMessageController {
     this.itemService = itemService;
   }
 
-  @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public ItemDto getItemById(@PathVariable Long id) {
-    return itemService.getItemById(id);
+  @RequestMapping(value = "/by_id/{id}", method = RequestMethod.GET)
+  public ItemDto byId(@PathVariable Long id) {
+    return itemService.byId(id);
   }
 
-    @RequestMapping(value = "/test/save", method = RequestMethod.POST)
-  public ItemDto saveNewElement(@RequestBody ItemDto request) {
-    return itemService.create(request);
+  @RequestMapping(value = "/save", method = RequestMethod.POST)
+  public ItemDto save(@RequestBody ItemDto request) {
+    return itemService.save(request);
   }
 
-  @RequestMapping(value = "/test/all/{id}", method = RequestMethod.GET)
-  public List getItemsByMultipleIds(@PathVariable List<Long> id) {
-    return itemService.getItemsByMultipleIds(id);
+  @RequestMapping(value = "/all", method = RequestMethod.GET)
+  public List all() {
+    return itemService.all();
   }
 
   @RequestMapping(value = "/edit", method = RequestMethod.POST)
-  public ItemDto editUser(@RequestBody ItemDto request) {
-    return itemService.editItem(request);
+  public ItemDto edit(@RequestBody ItemDto request) {
+    return itemService.edit(request);
   }
 }
 

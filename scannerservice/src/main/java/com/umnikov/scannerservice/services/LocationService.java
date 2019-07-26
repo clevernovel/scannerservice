@@ -1,42 +1,24 @@
 package com.umnikov.scannerservice.services;
 
 import com.umnikov.scannerlib.dto.LocationDto;
-import com.umnikov.scannerlib.dto.UserDto;
 import com.umnikov.scannerservice.dao.LocationDao;
 import com.umnikov.scannerservice.entity.Location;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @Transactional(transactionManager = "transactionManager")
-public class LocationService {
+public class LocationService extends ServiceForController<LocationDto, Location> {
   private final LocationDao locationDao;
 
   @Autowired
   public LocationService(LocationDao locationDao) {
+    super(locationDao);
     this.locationDao = locationDao;
   }
 
-  public LocationDto getLocationById(Long id) {
-    Location location = locationDao.byId(id == null ? 0 : id);
-    return convertToDto(location);
-  }
-
-  public List getLocationsByMultipleIds(List<Long> ids) {
-    return locationDao.byIds(ids);
-  }
-
-  public LocationDto editUser(LocationDto request) {
-    Location location = new Location();
-    location.setName(request.name);
-    locationDao.saveAndFlush(location);
-    return request;
-  }
-
-  public Location createModelOrGetExisting(LocationDto locationDto) {
+  public Location convertToModel(LocationDto locationDto) {
     Location location = locationDao.findByName(locationDto.name);
     if (location == null) {
       location = new Location();
@@ -44,6 +26,11 @@ public class LocationService {
       locationDao.saveAndFlush(location);
     }
     return location;
+  }
+
+  @Override
+  public LocationDto edit(LocationDto dto) {
+    return null;
   }
 
   public LocationDto convertToDto(Location location) {

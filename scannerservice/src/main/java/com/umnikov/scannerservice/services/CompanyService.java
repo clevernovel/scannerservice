@@ -7,42 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @Transactional(transactionManager = "transactionManager")
-public class CompanyService {
+public class CompanyService extends ServiceForController<CompanyDto, Company> {
   private final CompanyDao companyDao;
 
   @Autowired
   public CompanyService(CompanyDao companyDao) {
+    super(companyDao);
     this.companyDao = companyDao;
-  }
-
-  public CompanyDto getCompanyById(Long id) {
-    Company company = companyDao.byId(id == null ? 0 : id);
-    return convertToDto(company);
-  }
-
-  public List getCompaniesByMultipleIds(List<Long> ids) {
-    return companyDao.byIds(ids);
-  }
-
-  public CompanyDto editUser(CompanyDto request) {
-    Company company = new Company();
-    company.setName(request.name);
-    companyDao.saveAndFlush(company);
-    return request;
-  }
-
-  public Company createModelOrGetExisting(CompanyDto companyDto) {
-    Company company = companyDao.findByName(companyDto.name);
-    if (company == null) {
-      company = new Company();
-      company.setName(companyDto.name);
-      companyDao.saveAndFlush(company);
-    }
-    return company;
   }
 
   public CompanyDto convertToDto(Company company) {
@@ -52,7 +25,19 @@ public class CompanyService {
     return companyDto;
   }
 
-  public CompanyDto create(CompanyDto request) {
-    return convertToDto(createModelOrGetExisting(request));
+  @Override
+  public Company convertToModel(CompanyDto dto) {
+    Company company = companyDao.findByName(dto.name);
+    if (company == null) {
+      company = new Company();
+      company.setName(dto.name);
+      companyDao.saveAndFlush(company);
+    }
+    return company;
+  }
+
+  @Override
+  public CompanyDto edit(CompanyDto dto) {
+    return null;
   }
 }

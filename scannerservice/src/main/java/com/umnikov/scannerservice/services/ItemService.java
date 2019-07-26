@@ -7,11 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @Transactional(transactionManager = "transactionManager")
-public class ItemService {
+public class ItemService extends ServiceForController<ItemDto, Item> {
   private final ItemDao itemDao;
   private final LocationService locationService;
   private final QuantityService quantityService;
@@ -22,6 +20,7 @@ public class ItemService {
 
   @Autowired
   public ItemService(ItemDao itemDao, LocationService locationService, QuantityService quantityService, AccountService accountService, SectionService sectionService, EquipmentService equipmentService, MaterialService materialService) {
+    super(itemDao);
     this.itemDao = itemDao;
     this.locationService = locationService;
     this.quantityService = quantityService;
@@ -31,17 +30,8 @@ public class ItemService {
     this.materialService = materialService;
   }
 
-  public ItemDto getItemById(Long id) {
-    Item item = itemDao.byId(id == null ? 0 : id);
-    return convertToDto(item);
-  }
-
-  public List getItemsByMultipleIds(List<Long> ids) {
-    List<Item> list = itemDao.byIds(ids);
-    return list;
-  }
-
-  private ItemDto convertToDto(Item item) {
+  @Override
+  public ItemDto convertToDto(Item item) {
     ItemDto itemDto = new ItemDto();
     itemDto.id = item.getId();
     itemDto.name = item.getName();
@@ -56,36 +46,23 @@ public class ItemService {
     return itemDto;
   }
 
-  //this is not edit method
-  public ItemDto editItem(ItemDto request) {
+  @Override
+  public Item convertToModel(ItemDto dto) {
     Item item = new Item();
-    item.setName(request.name);
-//    item.setLocation(request.location);
-//    item.setQuantity(request.quantity);
-//    item.setAccount(request.account);
-//    item.setSection(request.section);
-//    item.setEquipment(request.equipment);
-//    item.setMaterial(request.material);
-    item.setGlobal(request.global);
-    item.setComment(request.comment);
-    return request;
+    item.setName(dto.name);
+    item.setLocation(locationService.convertToModel(dto.location));
+    item.setQuantity(quantityService.convertToModel(dto.quantity));
+    item.setAccount(accountService.convertToModel(dto.account));
+    item.setSection(sectionService.convertToModel(dto.section));
+    item.setEquipment(equipmentService.convertToModel(dto.equipment));
+    item.setMaterial(materialService.convertToModel(dto.material));
+    item.setGlobal(dto.global);
+    item.setComment(dto.comment);
+    return item;
   }
 
-  public Item createByRequest(ItemDto request) {
-    Item item = new Item();
-    item.setName(request.name);
-    item.setLocation(locationService.createModelOrGetExisting(request.location));
-    item.setQuantity(quantityService.createModelOrGetExisting(request.quantity));
-    item.setAccount(accountService.createModelOrGetExisting(request.account));
-    item.setSection(sectionService.createModelOrGetExisting(request.section));
-    item.setEquipment(equipmentService.createModelOrGetExisting(request.equipment));
-    item.setMaterial(materialService.createModelOrGetExisting(request.material));
-    item.setGlobal(request.global);
-    item.setComment(request.comment);
-    return itemDao.saveAndFlush(item);
-  }
-
-  public ItemDto create(ItemDto request) {
-    return convertToDto(createByRequest(request));
+  @Override
+  public ItemDto edit(ItemDto dto) {
+    return null;
   }
 }

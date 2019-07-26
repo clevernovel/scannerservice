@@ -1,7 +1,5 @@
 package com.umnikov.scannerservice.dao;
 
-import com.umnikov.scannerservice.entity.Location;
-import com.umnikov.scannerservice.entity.Location_;
 import com.umnikov.scannerservice.entity.Quantity;
 import com.umnikov.scannerservice.entity.Quantity_;
 import org.springframework.stereotype.Repository;
@@ -12,6 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.List;
 
 @Repository
 public class QuantityDao extends Dao<Quantity> {
@@ -23,6 +22,11 @@ public class QuantityDao extends Dao<Quantity> {
     super.save(quantity);
     super.flush();
     return quantity;
+  }
+
+  @Override
+  public List<Quantity> all() {
+    return getAll();
   }
 
   public Quantity findByName(String name) {

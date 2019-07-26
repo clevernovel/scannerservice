@@ -2,8 +2,6 @@ package com.umnikov.scannerservice.dao;
 
 import com.umnikov.scannerservice.entity.Country;
 import com.umnikov.scannerservice.entity.Country_;
-import com.umnikov.scannerservice.entity.Location;
-import com.umnikov.scannerservice.entity.Location_;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
@@ -12,6 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.List;
 
 @Repository
 public class CountryDao extends Dao<Country> {
@@ -23,6 +22,11 @@ public class CountryDao extends Dao<Country> {
     super.save(country);
     super.flush();
     return country;
+  }
+
+  @Override
+  public List<Country> all() {
+    return getAll();
   }
 
   public Country findByName(String name) {

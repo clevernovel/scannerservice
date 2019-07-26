@@ -17,19 +17,24 @@ public class CompanyMessageController {
     this.companyService = companyService;
   }
 
-  @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public CompanyDto getCompanyById(@PathVariable Long id) {
-    return companyService.getCompanyById(id);
+  @RequestMapping(value = "/by_id/{id}", method = RequestMethod.GET)
+  public CompanyDto byId(@PathVariable Long id) {
+    return companyService.byId(id);
   }
 
-  @RequestMapping(value = "/test/all/{id}", method = RequestMethod.GET)
-  public List getCompaniesByMultipleIds(@PathVariable List<Long> id) {
-    return companyService.getCompaniesByMultipleIds(id);
+  @RequestMapping(value = "/all", method = RequestMethod.GET)
+  public List<CompanyDto> all() {
+    return companyService.all();
   }
 
-  @RequestMapping(value = "/test/save", method = RequestMethod.POST)
-  public CompanyDto editUser(@RequestBody CompanyDto request) {
-    return companyService.create(request);
+  @RequestMapping(value = "/save", method = RequestMethod.POST)
+  public CompanyDto save(@RequestBody CompanyDto request) {
+    return companyService.save(request);
+  }
+
+  @RequestMapping(value = "/edit", method = RequestMethod.POST)
+  public CompanyDto edit(@RequestBody CompanyDto request) {
+    return companyService.edit(request);
   }
 }
 

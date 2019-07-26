@@ -13,19 +13,28 @@ public class SectionMessageController {
   private final SectionService sectionService;
 
   @Autowired
-  public SectionMessageController(SectionService sectionService) { this.sectionService = sectionService; }
-
-  @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-  public SectionDto getSectionById(@PathVariable Long id) {    return sectionService.getSectionById(id);
+  public SectionMessageController(SectionService sectionService) {
+    this.sectionService = sectionService;
   }
 
-  @RequestMapping(value = "/test/all/{id}", method = RequestMethod.GET)
-  public List getSectionsByMultipleIds(@PathVariable List<Long> id) {    return sectionService.getSectionsByMultipleIds(id);
+  @RequestMapping(value = "/by_id/{id}", method = RequestMethod.GET)
+  public SectionDto byId(@PathVariable Long id) {
+    return sectionService.byId(id);
   }
 
-  @RequestMapping(value = "/test/save", method = RequestMethod.POST)
-  public SectionDto editUser(@RequestBody SectionDto request) {
-    return sectionService.editUser(request);
+  @RequestMapping(value = "/all", method = RequestMethod.GET)
+  public List all() {
+    return sectionService.all();
+  }
+
+  @RequestMapping(value = "/save", method = RequestMethod.POST)
+  public SectionDto save(@RequestBody SectionDto request) {
+    return sectionService.save(request);
+  }
+
+  @RequestMapping(value = "/edit", method = RequestMethod.POST)
+  public SectionDto edit(@RequestBody SectionDto request) {
+    return sectionService.edit(request);
   }
 }
 
